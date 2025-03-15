@@ -1,10 +1,15 @@
-/* Base styles */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
     transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+    background-color: #333;
+    color: #fff;
 }
 
 header {
@@ -48,84 +53,64 @@ footer {
     width: 100%;
 }
 
-/* Dark mode styles */
-body.dark-mode {
-    background-color: #1a1a1a;
-    color: #f0f0f0;
-}
-
-body.dark-mode header {
-    background-color: #2c662d;
-}
-
-body.dark-mode footer {
-    background-color: #2a2a2a;
-}
-
-/* Button styles */
-button {
-    background-color: #4CAF50;
+/* Dark Mode Toggle */
+#darkModeToggle {
+    background-color: #f4f4f4;
     border: none;
-    color: white;
     padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #45a049;
+.dark-mode #darkModeToggle {
+    background-color: #555;
+    color: white;
 }
 
-/* Back to Top button */
+/* Back to Top Button */
 #backToTop {
     display: none;
     position: fixed;
     bottom: 20px;
     right: 30px;
     z-index: 99;
-    font-size: 18px;
     border: none;
     outline: none;
     background-color: #555;
     color: white;
     cursor: pointer;
     padding: 15px;
-    border-radius: 4px;
+    border-radius: 10px;
 }
 
 #backToTop:hover {
     background-color: #333;
 }
 
-/* AI Term Tooltips */
+/* AI Term Tooltip */
 .ai-term {
     border-bottom: 1px dotted #4CAF50;
-    position: relative;
     cursor: help;
+    position: relative;
 }
 
-.tooltip {
-    display: none;
+.ai-term::after {
+    content: attr(data-tooltip);
     position: absolute;
-    background-color: #f9f9f9;
-    color: #333;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    z-index: 1;
-    width: 200px;
     bottom: 125%;
     left: 50%;
-    margin-left: -100px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transform: translateX(-50%);
+    background-color: #555;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
 }
 
-body.dark-mode .tooltip {
-    background-color: #333;
-    color: #f0f0f0;
+.ai-term:hover::after {
+    opacity: 1;
 }
