@@ -1,72 +1,78 @@
 document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('dark-mode-toggle');
-    const body = document.body;
+    const backToTopButton = document.getElementById('back-to-top');
 
-    // Check for saved dark mode preference
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    // Dark mode functionality
+    const enableDarkMode = () => {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+    };
 
-    // Set initial dark mode state
-    if (isDarkMode) {
-        body.classList.add('dark-mode');
+    const disableDarkMode = () => {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', 'disabled');
+    };
+
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        enableDarkMode();
     }
 
-    // Toggle dark mode
     darkModeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+        if (localStorage.getItem('darkMode') !== 'enabled') {
+            enableDarkMode();
+        } else {
+            disableDarkMode();
+        }
     });
 
-    console.log("AI and Agents website loaded successfully!");
-});
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
 
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
+    // Back to top button
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
 
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
             behavior: 'smooth'
+        });
+    });
+
+    // Tooltip functionality
+    const aiTerms = document.querySelectorAll('.ai-term');
+    aiTerms.forEach(term => {
+        term.addEventListener('mouseenter', () => {
+            const tooltip = term.getAttribute('data-tooltip');
+            const tooltipElement = document.createElement('div');
+            tooltipElement.classList.add('tooltip');
+            tooltipElement.textContent = tooltip;
+            document.body.appendChild(tooltipElement);
+
+            const rect = term.getBoundingClientRect();
+            tooltipElement.style.left = rect.left + window.pageXOffset + 'px';
+            tooltipElement.style.top = rect.top + window.pageYOffset - tooltipElement.offsetHeight - 10 + 'px';
+        });
+
+        term.addEventListener('mouseleave', () => {
+            const tooltip = document.querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.remove();
+            }
         });
     });
 });
 
-// Back to top button
-const backToTopButton = document.createElement('button');
-backToTopButton.innerHTML = '↑';
-backToTopButton.setAttribute('id', 'back-to-top');
-document.body.appendChild(backToTopButton);
-
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 100) {
-        backToTopButton.style.display = 'block';
-    } else {
-        backToTopButton.style.display = 'none';
-    }
-});
-
-backToTopButton.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Tooltip functionality for AI terms
-const aiTerms = document.querySelectorAll('.ai-term');
-
-aiTerms.forEach(term => {
-    term.addEventListener('mouseover', (e) => {
-        const tooltip = document.createElement('div');
-        tooltip.className = 'tooltip';
-        tooltip.innerHTML = e.target.getAttribute('data-tooltip');
-        document.body.appendChild(tooltip);
-
-        const rect = e.target.getBoundingClientRect();
-        tooltip.style.top = `${rect.bottom + window.scrollY}px`;
-        tooltip.style.left = `${rect.left + window.scrollX}px`;
-    });
-
-    term.addEventListener('mouseout', () => {
-        const tooltip = document.querySelector('.tooltip');
-        if (tooltip) {
-            tooltip.remove();
-        }
-    });
-});
+console.log("AI and Agents website loaded successfully!");
