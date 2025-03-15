@@ -1,34 +1,34 @@
 # AI and Agents Website
 
-This project is an educational website about Artificial Intelligence (AI) and Intelligent Agents. It aims to provide comprehensive information on various aspects of AI, including different types of AI, applications, and ethical considerations.
+This project is a simple website about AI and Intelligent Agents. It provides basic information about various aspects of artificial intelligence and its applications.
 
-## Project Structure
+## File Structure
 
 - `index.html`: The main HTML file containing the structure of the website.
 - `styles.css`: CSS file for styling the website.
-- `script.js`: JavaScript file for interactive features.
+- `script.js`: JavaScript file for adding interactivity (currently empty).
 
 ## Features
 
-- Responsive design
-- Dark mode toggle
-- Smooth scrolling navigation
-- Back to top button
-- Tooltips for AI terms
+- Basic responsive layout
+- Information sections on:
+  - Introduction to AI
+  - AI Types
+  - Intelligent Agents
+  - Applications of AI
+  - Ethics in AI
+
+## Future Improvements
+
+- Add more detailed content to each section
+- Implement dark mode functionality
+- Add interactive elements using JavaScript
+- Include images and diagrams to illustrate concepts
+- Create additional pages for in-depth topics
 
 ## How to Use
 
-1. Clone this repository to your local machine.
-2. Open `index.html` in a web browser to view the website.
+1. Clone this repository
+2. Open `index.html` in your web browser
 
-## Contributing
-
-We welcome contributions to improve the content and functionality of this website. Please feel free to submit issues for suggestions and improvements, or create pull requests with your proposed changes.
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-Created by Axle-Bucamp
+Feel free to contribute to this project by submitting pull requests or opening issues for suggestions and improvements.
